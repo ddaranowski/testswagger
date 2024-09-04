@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -23,7 +24,8 @@ namespace WebApplication2
         public string ShapeType { get; set; }
     }
 
-    [SwaggerDiscriminator("ShapeType")]
+    //[SwaggerDiscriminator("ShapeType")]
+  
     
     public class Rectangle : Shape
     {
@@ -35,6 +37,7 @@ namespace WebApplication2
         [JsonProperty("width")]
         public double Width { get; set; }
 
+        [Required]
         [JsonProperty("height")]
         public double Height { get; set; }
 
@@ -53,9 +56,12 @@ namespace WebApplication2
             ShapeType = "circle";
         }
 
+        [Required]
         [JsonProperty("radius")]
         public double Radius { get; set; }
 
+
+        public TypeOfCircle TypeOfCircle { get; set; }
 
         //[SwaggerSchema("Circle", ReadOnly = true, Title = "Title")]
         //[DefaultValue(ShapeTypeEnum.rectangle)]
@@ -92,5 +98,9 @@ namespace WebApplication2
     }
 
 
-
+    public enum TypeOfCircle
+    {
+        Big,
+        Small,
+    }
 }

@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Converters;
+using WebApplication2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,9 @@ builder.Services.AddSwaggerGen(c =>
     c.UseOneOfForPolymorphism();
     c.EnableAnnotations();
     c.SchemaFilter<PolymorphismSchemaFilter>();
+    c.SchemaFilter<EnumSchemaFilter>();
 
-      
+
     c.SupportNonNullableReferenceTypes();
     //c.CustomSchemaIds(type => type.FullName);
 });

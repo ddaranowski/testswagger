@@ -9,15 +9,15 @@ public class PolymorphismSchemaFilter : ISchemaFilter
     {
         if (context.Type == typeof(Shape))
         {
-            schema.Discriminator = new OpenApiDiscriminator
-            {
-                PropertyName = "shapeType",
-                Mapping = new Dictionary<string, string>
-                {
-                    { "rectangle", "#/components/schemas/Rectangle" },
-                    { "circle", "#/components/schemas/Circle" }
-                }
-            };
+            //schema.Discriminator = new OpenApiDiscriminator
+            //{
+            //    PropertyName = "shapeType",
+            //    //Mapping = new Dictionary<string, string>
+            //    //{
+            //    //    { "rectangle", "#/components/schemas/Rectangle" },
+            //    //    { "circle", "#/components/schemas/Circle" }
+            //    //}
+            //};
            
             schema.OneOf = new List<OpenApiSchema>
             {
@@ -27,51 +27,51 @@ public class PolymorphismSchemaFilter : ISchemaFilter
         }
 
 
-        if (context.Type == typeof(Circle))
-        {
-            schema.Properties.Add("discriminatorValue", new OpenApiSchema()
-            {
-                Enum = new List<IOpenApiAny>
-                {
-                    new OpenApiString("Circle"),
-                }
-                ,Default = new OpenApiString("Circle"),
+        //if (context.Type == typeof(Circle))
+        //{
+        //    schema.Properties.Add("discriminatorValue", new OpenApiSchema()
+        //    {
+        //        Enum = new List<IOpenApiAny>
+        //        {
+        //            new OpenApiString("Circle"),
+        //        }
+        //        ,Default = new OpenApiString("Circle"),
                 
-            });
-        }
+        //    });
+        //}
 
-        if (context.Type == typeof(Rectangle))
-        {
-            schema.Properties.Add("discriminatorValue", new OpenApiSchema()
-            {
-                Enum = new List<IOpenApiAny>
-                {
-                    new OpenApiString("Rectangle"),
-                }
-                ,
-                Default = new OpenApiString("Rectangle"),
+        //if (context.Type == typeof(Rectangle))
+        //{
+        //    schema.Properties.Add("discriminatorValue", new OpenApiSchema()
+        //    {
+        //        Enum = new List<IOpenApiAny>
+        //        {
+        //            new OpenApiString("Rectangle"),
+        //        }
+        //        ,
+        //        Default = new OpenApiString("Rectangle"),
 
-            });
-        }
+        //    });
+       // }
 
 
-        if (context.Type == typeof(CircleBase))
-        {
-            schema.Discriminator = new OpenApiDiscriminator
-            {
-                PropertyName = "circleType",
-                Mapping = new Dictionary<string, string>
-                {
-                    { "BigCircle", "#/components/schemas/BigCircle" },
-                    { "SmallCircle", "#/components/schemas/SmallCircle" }
-                }
-            };
+        //if (context.Type == typeof(CircleBase))
+        //{
+        //    schema.Discriminator = new OpenApiDiscriminator
+        //    {
+        //        PropertyName = "circleType",
+        //        Mapping = new Dictionary<string, string>
+        //        {
+        //            { "BigCircle", "#/components/schemas/BigCircle" },
+        //            { "SmallCircle", "#/components/schemas/SmallCircle" }
+        //        }
+        //    };
 
-            schema.OneOf = new List<OpenApiSchema>
-            {
-                new OpenApiSchema { Reference = new OpenApiReference { Id = "BigCircle", Type = ReferenceType.Schema } },
-                new OpenApiSchema { Reference = new OpenApiReference { Id = "SmallCircle", Type = ReferenceType.Schema } }
-            };
-        }
+        //    schema.OneOf = new List<OpenApiSchema>
+        //    {
+        //        new OpenApiSchema { Reference = new OpenApiReference { Id = "BigCircle", Type = ReferenceType.Schema } },
+        //        new OpenApiSchema { Reference = new OpenApiReference { Id = "SmallCircle", Type = ReferenceType.Schema } }
+        //    };
+        //}
     }
 }
