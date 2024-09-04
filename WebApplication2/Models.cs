@@ -39,10 +39,10 @@ namespace WebApplication2
         public double Height { get; set; }
 
 
-        [SwaggerSchema("Rectangle", ReadOnly = true, Title = "Title")]
-        [DefaultValue(ShapeTypeEnum.rectangle)]
+        //[SwaggerSchema("Rectangle", ReadOnly = true, Title = "Title")]
+        //[DefaultValue(ShapeTypeEnum.rectangle)]
 
-        public string DiscriminatorValue { get; set; } = "Rectangle";
+        //public string DiscriminatorValue { get; set; } = "Rectangle";
 
     }
 
@@ -57,9 +57,9 @@ namespace WebApplication2
         public double Radius { get; set; }
 
 
-        [SwaggerSchema("Circle", ReadOnly = true, Title = "Title")]
-        [DefaultValue(ShapeTypeEnum.rectangle)]
-        public string DiscriminatorValue { get; set; }
+        //[SwaggerSchema("Circle", ReadOnly = true, Title = "Title")]
+        //[DefaultValue(ShapeTypeEnum.rectangle)]
+        //public string DiscriminatorValue { get; set; }
 
     }
 

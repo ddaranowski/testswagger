@@ -27,32 +27,32 @@ public class PolymorphismSchemaFilter : ISchemaFilter
         }
 
 
-        //if (context.Type == typeof(Circle))
-        //{
-        //    schema.Properties.Add("discriminatorValue", new OpenApiSchema()
-        //    {
-        //        Enum = new List<IOpenApiAny>
-        //        {
-        //            new OpenApiString("Circle"),
-        //        }
-        //        ,Default = new OpenApiString("Circle"),
+        if (context.Type == typeof(Circle))
+        {
+            schema.Properties.Add("discriminatorValue", new OpenApiSchema()
+            {
+                Enum = new List<IOpenApiAny>
+                {
+                    new OpenApiString("Circle"),
+                }
+                ,Default = new OpenApiString("Circle"),
                 
-        //    });
-        //}
+            });
+        }
 
-        //if (context.Type == typeof(Rectangle))
-        //{
-        //    schema.Properties.Add("discriminatorValue", new OpenApiSchema()
-        //    {
-        //        Enum = new List<IOpenApiAny>
-        //        {
-        //            new OpenApiString("Rectangle"),
-        //        }
-        //        ,
-        //        Default = new OpenApiString("Rectangle"),
+        if (context.Type == typeof(Rectangle))
+        {
+            schema.Properties.Add("discriminatorValue", new OpenApiSchema()
+            {
+                Enum = new List<IOpenApiAny>
+                {
+                    new OpenApiString("Rectangle"),
+                }
+                ,
+                Default = new OpenApiString("Rectangle"),
 
-        //    });
-        //}
+            });
+        }
 
 
         if (context.Type == typeof(CircleBase))
