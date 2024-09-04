@@ -8,7 +8,7 @@ public class CircleTypeJsonConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
     {
-        return typeof(CircleType).IsAssignableFrom(objectType);
+        return typeof(CircleBase).IsAssignableFrom(objectType);
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -16,28 +16,28 @@ public class CircleTypeJsonConverter : JsonConverter
         var jo = JObject.Load(reader);
         string type = jo["type"].ToString();
 
-        CircleType circleType;
+        CircleBase circleBase;
         if (jo.ContainsKey("AStringProperty"))
         {
-            circleType = new BigCircle();
+            circleBase = new BigCircle();
         }
         else if (jo.ContainsKey("outline"))
         {
-            circleType = new SmallCircle();
+            circleBase = new SmallCircle();
         }
         else
         {
             throw new ArgumentException("Unknown CircleType type");
         }
 
-        circleType.Type = type;
-        serializer.Populate(jo.CreateReader(), circleType);
-        return circleType;
+        circleBase.CircleType = type;
+        serializer.Populate(jo.CreateReader(), circleBase);
+        return circleBase;
     }
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var circleType = value as CircleType;
+        var circleType = value as CircleBase;
         var jo = JObject.FromObject(value, serializer);
         jo.WriteTo(writer);
     }

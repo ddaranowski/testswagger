@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,9 @@ builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.Converters.Add(new ShapeJsonConverter());
-        options.SerializerSettings.Converters.Add(new CircleTypeJsonConverter());
+        options.SerializerSettings.Converters.Add(new CircleTypeJsonConverter()); 
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+       
     });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -19,14 +23,15 @@ builder.Services.AddSwaggerGen(c =>
     c.EnableAnnotations();
     c.SchemaFilter<PolymorphismSchemaFilter>();
 
-
+      
     c.SupportNonNullableReferenceTypes();
     //c.CustomSchemaIds(type => type.FullName);
 });
 
+builder.Services.AddSwaggerGenNewtonsoftSupport();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+   // Configure the HTTP request pipeline.
 
     app.UseSwagger();
     app.UseSwaggerUI(c =>
