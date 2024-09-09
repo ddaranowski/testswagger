@@ -19,12 +19,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Shapes API", Version = "v1" });
-    c.UseAllOfToExtendReferenceSchemas();
+    //c.UseAllOfToExtendReferenceSchemas();
     c.UseOneOfForPolymorphism();
+
     c.EnableAnnotations();
     c.SchemaFilter<PolymorphismSchemaFilter>();
     c.SchemaFilter<EnumSchemaFilter>();
-
+    c.SchemaFilter<FlattenInheritanceSchemaFilter>();
+    c.SchemaFilter<CustomSchemaFilter>();
 
     c.SupportNonNullableReferenceTypes();
     //c.CustomSchemaIds(type => type.FullName);

@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApplication2;
 
+
 public class PolymorphismSchemaFilter : ISchemaFilter
 {
     public void Apply(OpenApiSchema schema, SchemaFilterContext context)
@@ -15,10 +16,12 @@ public class PolymorphismSchemaFilter : ISchemaFilter
             //    //Mapping = new Dictionary<string, string>
             //    //{
             //    //    { "rectangle", "#/components/schemas/Rectangle" },
+            //    //    { "rectangle", "#/components/schemas/Rectangle" },
+            //    //    { "rectangle", "#/components/schemas/Rectangle" },
             //    //    { "circle", "#/components/schemas/Circle" }
             //    //}
             //};
-           
+
             schema.OneOf = new List<OpenApiSchema>
             {
                 new OpenApiSchema { Reference = new OpenApiReference { Id = "Rectangle", Type = ReferenceType.Schema } },
